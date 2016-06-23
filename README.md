@@ -42,7 +42,8 @@ pages solves this problem. A basic nested page looks like this:
           style: 'French',
           navigationTitle: 'French Recipes'
         }
-      },{
+      },
+      {
         key: 'recipe150',
         page: 'RecipePage',
         props: {
