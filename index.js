@@ -31,10 +31,10 @@ function joinPath(path) {
 function getChildPage(root, path) {
   var retval = root;
   (0, _map2.default)(path, function (key) {
-    if (!retval.props.childPages || retval.props.childPages.length === 0) {
+    if (!retval.props.children || retval.props.children.length === 0) {
       throw 'No child page descriptors at path \'' + joinPath(path) + '\'.';
     }
-    retval = (0, _find2.default)(retval.props.childPages, function (p) {
+    retval = (0, _find2.default)(retval.props.children, function (p) {
       return p.key === key;
     });
     if (!retval) throw 'No child page descriptor with key \'' + key + '\' at path \'' + joinPath(path) + '\'.';

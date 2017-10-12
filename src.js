@@ -10,10 +10,10 @@ function joinPath(path) {
 function getChildPage(root, path) {
   let retval = root;
   map(path, (key) => {
-    if (!retval.props.childPages || (retval.props.childPages.length === 0)) {
+    if (!retval.props.children || (retval.props.children.length === 0)) {
       throw `No child page descriptors at path '${joinPath(path)}'.`;
     }
-    retval = find(retval.props.childPages, (p) => p.key === key);
+    retval = find(retval.props.children, (p) => p.key === key);
     if (!retval) throw `No child page descriptor with key '${key}' at path '${joinPath(path)}'.`;
   });
   return retval;

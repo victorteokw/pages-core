@@ -34,7 +34,7 @@ pages solves this problem. A basic nested page looks like this:
   key: 'navigation',
   page: 'NavigationPage',
   props: {
-    childPages: [
+    children: [
       {
         key: 'recipes',
         page: 'RecipeListPage',
@@ -56,7 +56,7 @@ pages solves this problem. A basic nested page looks like this:
 }
 ```
 
-The childPages field in props specifies child page descriptors and therefore make the pages connected. Container page
+The children field in props specifies child page descriptors and therefore make the pages connected. Container page
 renders child pages with additional UI if needed. For example, navigation page adds a navigation bar at the top of the
 page. Container page can require special props on child pages, too. For example: navigation page takes navigation title
 from child pages and renders it on its own navigation bar.

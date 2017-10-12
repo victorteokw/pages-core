@@ -8,7 +8,7 @@ suite('pages-core', function() {
     key: 'column',
     page: 'ColumnPage',
     props: {
-      childPages: [
+      children: [
         {
           key: 'camera',
           page: 'CameraPage',
@@ -27,7 +27,7 @@ suite('pages-core', function() {
             showVideos: true,
             showPhotos: true,
             showEditButton: false,
-            childPages: [
+            children: [
               {
                 key: 'preview0026',
                 page: 'PhotoPreviewPage',
@@ -44,7 +44,7 @@ suite('pages-core', function() {
                 key: 'editing0028',
                 page: 'PhotoEditorPage',
                 props: {
-                  childPages: [
+                  children: [
                     {
                       key: 'editingTools0028',
                       page: 'EditingToolsPage',
@@ -102,14 +102,14 @@ suite('pages-core', function() {
   });
   test('setPageProps sets page props at deep path', function() {
     let wantedResult = cloneDeep(root);
-    find(find(find(wantedResult.props.childPages, (c) => c.key === 'photos').props.childPages, (c) => c.key === 'editing0028').props.childPages, c => c.key === 'editingTools0028').props.block = true;
+    find(find(find(wantedResult.props.children, (c) => c.key === 'photos').props.children, (c) => c.key === 'editing0028').props.children, c => c.key === 'editingTools0028').props.block = true;
     assert.deepEqual(setPageProps(root, ['photos', 'editing0028', 'editingTools0028'], {block: true}), wantedResult);
   });
   test('replacePageProps replaces page props at root path', function() {
     let wantedResult = cloneDeep(root);
     wantedResult.props = {
       expandColumn: false,
-      childPages: [
+      children: [
         {
           key: 'welcome',
           page: 'WelcomePage',
@@ -121,7 +121,7 @@ suite('pages-core', function() {
   });
   test('replacePageProps replaces page props at deep path', function() {
     let wantedResult = cloneDeep(root);
-    find(find(find(wantedResult.props.childPages, (c) => c.key === 'photos').props.childPages, (c) => c.key === 'editing0028').props.childPages, (c) => c.key === 'editingTools0028').props = {block: true};
+    find(find(find(wantedResult.props.children, (c) => c.key === 'photos').props.children, (c) => c.key === 'editing0028').props.children, (c) => c.key === 'editingTools0028').props = {block: true};
     assert.deepEqual(replacePageProps(root, ['photos', 'editing0028', 'editingTools0028'], {block: true}), wantedResult);
   });
 });
