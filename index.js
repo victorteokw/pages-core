@@ -3,8 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getPageProps = getPageProps;
 exports.setPageProps = setPageProps;
 exports.replacePageProps = replacePageProps;
+exports.transformPageProps = transformPageProps;
 
 var _map = require('lodash/map');
 
@@ -28,7 +30,7 @@ function joinPath(path) {
   return path.join('.');
 }
 
-function getChildPage(root, path) {
+function getPage(root, path) {
   var retval = root;
   (0, _map2.default)(path, function (key) {
     if (!retval.props.children || retval.props.children.length === 0) {
@@ -42,9 +44,13 @@ function getChildPage(root, path) {
   return retval;
 }
 
+function getPageProps(root, path) {
+  return getPage(root, path).props;
+}
+
 function _setPageProps(root, path, props, replace) {
   root = (0, _cloneDeep2.default)(root);
-  var childPage = getChildPage(root, path);
+  var childPage = getPage(root, path);
   childPage.props = replace ? props : (0, _assign2.default)({}, childPage.props, props);
   return root;
 }
@@ -55,4 +61,8 @@ function setPageProps(root, path, props) {
 
 function replacePageProps(root, path, props) {
   return _setPageProps(root, path, props, true);
+}
+
+function transformPageProps(root, path, transformer) {
+  return replacePageProps(root, path, transformer(getPageProps(root, path)));
 }
