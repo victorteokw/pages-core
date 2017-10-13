@@ -7,7 +7,7 @@ function joinPath(path) {
   return path.join('.');
 }
 
-function getChildPage(root, path) {
+function getPage(root, path) {
   let retval = root;
   map(path, (key) => {
     if (!retval.props.children || (retval.props.children.length === 0)) {
@@ -19,9 +19,13 @@ function getChildPage(root, path) {
   return retval;
 }
 
+export function getPageProps(root, path) {
+  return getPage(root, path).props;
+}
+
 function _setPageProps(root, path, props, replace) {
   root = cloneDeep(root);
-  let childPage = getChildPage(root, path);
+  let childPage = getPage(root, path);
   childPage.props = replace ? props : assign({}, childPage.props, props);
   return root;
 }
@@ -32,4 +36,8 @@ export function setPageProps(root, path, props) {
 
 export function replacePageProps(root, path, props) {
   return _setPageProps(root, path, props, true);
+}
+
+export function transformPageProps(root, path, transformer) {
+  return replacePageProps(root, path, transformer(getPageProps(root, path)));
 }
